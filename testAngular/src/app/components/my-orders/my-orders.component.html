@@ -1,0 +1,29 @@
+<h2>My Orders</h2> 
+<p-table #dt [columns]="cols"  
+    [value]="orders" responsiveLayout="scroll"> 
+    <ng-template pTemplate="header" let-columns> 
+        <tr> 
+            <th *ngFor="let col of columns"> 
+                {{ col.header }} 
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+    </ng-template> 
+    <ng-template pTemplate="body" let-rowData let-columns="columns"> 
+        <tr [pSelectableRow]="rowData"> 
+            <td *ngFor="let col of columns"> 
+                {{ rowData[col.field] }} 
+            </td>
+            <td>
+                <button pButton class="pi pi-pencil" style="font-size: 1.2rem" (click)="redirectEditOrder(rowData)"></button>
+                <button pButton class="pi pi-trash" style="font-size: 1.2rem" (click)="deleteOrder(rowData)"></button>
+            </td>
+        </tr> 
+    </ng-template> 
+</p-table>
+
+<p-button label="New Order" (onClick)="redirectNewOrder()" icon="pi pi-plus"></p-button>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
